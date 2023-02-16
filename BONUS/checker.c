@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../INCLUDES/push_swap.h"
 
 static int	str_cmp(char *s1, char *s2)
 {

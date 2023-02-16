@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ins_rotate.c                                       :+:      :+:    :+:   */
+/*   ins_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fguirama <fguirama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 10:02:27 by fguirama          #+#    #+#             */
-/*   Updated: 2022/11/29 17:31:42 by fguirama         ###   ########.fr       */
+/*   Created: 2022/11/23 13:55:25 by fguirama          #+#    #+#             */
+/*   Updated: 2022/11/29 17:32:14 by fguirama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../INCLUDES/push_swap.h"
 
-static void	rotate(int *stack, int *len)
+static void	swap(int *stack, int len)
 {
 	int	tmp;
 
-	if (*len <= 1)
-		return ;
-	tmp = stack[0];
-	move_up(stack, len);
-	stack[*len] = tmp;
-	*len += 1;
+	if (len > 1)
+	{
+		tmp = stack[0];
+		stack[0] = stack[1];
+		stack[1] = tmp;
+	}
 }
 
-void	ra(t_stack *stack)
+void	sa(t_stack *stack)
 {
-	rotate(stack->a, &stack->len_a);
+	swap(stack->a, stack->len_a);
 	if (stack->print)
-		put_str_nl("ra");
+		put_str_nl("sa");
 }
 
-void	rb(t_stack *stack)
+void	sb(t_stack *stack)
 {
-	rotate(stack->b, &stack->len_b);
+	swap(stack->b, stack->len_b);
 	if (stack->print)
-		put_str_nl("rb");
+		put_str_nl("sb");
 }
 
-void	rr(t_stack *stack)
+void	ss(t_stack *stack)
 {
-	rotate(stack->a, &stack->len_a);
-	rotate(stack->b, &stack->len_b);
+	swap(stack->a, stack->len_a);
+	swap(stack->b, stack->len_b);
 	if (stack->print)
-		put_str_nl("rr");
+		put_str_nl("ss");
 }

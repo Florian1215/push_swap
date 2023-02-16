@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_solve3.c                                     :+:      :+:    :+:   */
+/*   solve_radix.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fguirama <fguirama@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/06 18:32:00 by fguirama          #+#    #+#             */
-/*   Updated: 2023/01/06 18:32:00 by fguirama         ###   ########lyon.fr   */
+/*   Created: 2022/12/30 11:43:00 by fguirama          #+#    #+#             */
+/*   Updated: 2022/12/30 11:43:00 by fguirama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../INCLUDES/push_swap.h"
 
-int	abs(int n)
+void	solve_radix(t_stack *stack)
 {
-	return (n * (-1 * (n < 0) + (n > 0)));
-}
+	int	index;
+	int	i;
 
-static int	max(int a, int b)
-{
-	if (a > b)
-		return (a);
-	return (b);
-}
-
-int	get_move(int a, int b)
-{
-	if ((a > 0 && b > 0) || (a < 0 && b < 0))
-		return (max(abs(a), abs(b)));
-	return (abs(a) + abs(b));
+	index = 0;
+	while (!is_sort(stack, 1))
+	{
+		i = -1;
+		while (++i < stack->len)
+		{
+			if (stack->a[0] >> index & 1)
+				ra(stack);
+			else
+				pb(stack);
+		}
+		while (stack->len_b)
+			pa(stack);
+		index++;
+	}
 }

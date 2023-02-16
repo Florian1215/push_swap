@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../INCLUDES/push_swap.h"
 
 void	efficient_move(t_stack *stack, t_stacks s, int index)
 {

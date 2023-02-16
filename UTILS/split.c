@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../INCLUDES/push_swap.h"
 
 static int	word_len(char const *s)
 {

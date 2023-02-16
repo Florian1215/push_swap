@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ins_swap.c                                         :+:      :+:    :+:   */
+/*   ins_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fguirama <fguirama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:55:25 by fguirama          #+#    #+#             */
-/*   Updated: 2022/11/29 17:32:14 by fguirama         ###   ########.fr       */
+/*   Created: 2022/11/24 10:02:27 by fguirama          #+#    #+#             */
+/*   Updated: 2022/11/29 17:31:42 by fguirama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../INCLUDES/push_swap.h"
 
-static void	swap(int *stack, int len)
+static void	rotate(int *stack, int *len)
 {
 	int	tmp;
 
-	if (len > 1)
-	{
-		tmp = stack[0];
-		stack[0] = stack[1];
-		stack[1] = tmp;
-	}
+	if (*len <= 1)
+		return ;
+	tmp = stack[0];
+	move_up(stack, len);
+	stack[*len] = tmp;
+	*len += 1;
 }
 
-void	sa(t_stack *stack)
+void	ra(t_stack *stack)
 {
-	swap(stack->a, stack->len_a);
+	rotate(stack->a, &stack->len_a);
 	if (stack->print)
-		put_str_nl("sa");
+		put_str_nl("ra");
 }
 
-void	sb(t_stack *stack)
+void	rb(t_stack *stack)
 {
-	swap(stack->b, stack->len_b);
+	rotate(stack->b, &stack->len_b);
 	if (stack->print)
-		put_str_nl("sb");
+		put_str_nl("rb");
 }
 
-void	ss(t_stack *stack)
+void	rr(t_stack *stack)
 {
-	swap(stack->a, stack->len_a);
-	swap(stack->b, stack->len_b);
+	rotate(stack->a, &stack->len_a);
+	rotate(stack->b, &stack->len_b);
 	if (stack->print)
-		put_str_nl("ss");
+		put_str_nl("rr");
 }

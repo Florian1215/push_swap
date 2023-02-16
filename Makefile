@@ -1,53 +1,50 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: fguirama <fguirama@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/23 09:48:29 by fguirama          #+#    #+#              #
-#    Updated: 2022/12/06 14:28:48 by fguirama         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-OBJS_DIR		= OBJ/
+# VAR ---------------------------------------------------------------
+OBJS_DIR		=	.OBJS/
+SRCS			=	INSTRUCTIONS/push.c INSTRUCTIONS/reverse.c INSTRUCTIONS/rotate.c INSTRUCTIONS/swap.c \
+					UTILS/parsing.c UTILS/sort_index.c UTILS/split.c UTILS/utils1.c UTILS/utils2.c
+OBJS_SRC		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
-SRCS			= ins_push.c ins_reverse.c ins_rotate.c ins_swap.c parsing.c sort_index.c split.c utils1.c utils2.c
-OBJS_SRCS		= $(addprefix ${OBJS_DIR}, $(SRCS:.c=.o))
+NAME			=	push_swap
+SRCS_MAND		=	SOLVE/push_swap.c SOLVE/radix.c SOLVE/smart_sort.c SOLVE/utils_solve1.c SOLVE/utils_solve2.c SOLVE/utils_solve3.c
+OBJS_MAND		=	$(addprefix $(OBJS_DIR), $(SRCS_MAND:.c=.o))
 
-SRCS_PS			= push_swap.c solve_radix.c solve_smart_sort.c utils_solve1.c utils_solve2.c utils_solve3.c
-OBJS_PS			= $(addprefix ${OBJS_DIR}, $(SRCS_PS:.c=.o))
-NAME			= push_swap
+NAME_BONUS		=	checker
+SRCS_BONUS		=	BONUS/checker.c BONUS/get_next_line.c
+OBJS_BONUS		=	$(addprefix $(OBJS_DIR), $(SRCS_BONUS:.c=.o))
 
-BON				= bonus_checker.c bonus_get_next_line.c
-OBJS_BON		= $(addprefix ${OBJS_DIR}, $(BON:.c=.o))
-NAME_BON		= checker
+HEAD_DIR		=	INCLUDES/
+HEAD			=	$(HEAD_DIR)$(NAME).h
 
-HEAD			= .
-CC				= cc
-RM				= rm -rf
-FLAGS			= -Wall -Wextra -Werror
+CC				=	cc
+RM				=	rm -rf
+FLAGS			=	-Wall -Wextra -Werror
 
-all:			${NAME}
+# RULES -------------------------------------------------------------
+all:				$(NAME)
 
-$(OBJS_DIR)%.o: %.c ${HEAD}
-				${CC} ${FLAGS} -I ${HEAD} -c $< -o $@
+$(NAME):			$(OBJS_SRC) $(OBJS_MAND)
+					$(CC) $(FLAGS) $(OBJS_SRC) $(OBJS_MAND) -o $(NAME)
 
-${NAME}:		dir ${OBJS_SRCS} ${OBJS_PS}
-				${CC} ${FLAGS} ${OBJS_SRCS} ${OBJS_PS} -o ${NAME}
+bonus:				$(OBJS_SRC) $(OBJS_BONUS)
+					$(CC) $(FLAGS) $(OBJS_SRC) $(OBJS_BONUS) -o $(NAME_BONUS)
+
+$(OBJS_DIR)%.o:		%.c $(HEAD) Makefile | dir
+					$(CC) $(FLAGS) -I $(HEAD_DIR) -c $< -o $@
 
 dir:
-				mkdir -p ${OBJS_DIR}
-
-bonus:			dir ${OBJS_SRCS} ${OBJS_BON}
-				${CC} ${FLAGS} ${OBJS_SRCS} ${OBJS_BON} -o ${NAME_BON}
+					@mkdir -p $(OBJS_DIR)
+					@mkdir -p $(OBJS_DIR)BONUS
+					@mkdir -p $(OBJS_DIR)INSTRUCTIONS
+					@mkdir -p $(OBJS_DIR)SOLVE
+					@mkdir -p $(OBJS_DIR)UTILS
 
 clean:
-				${RM} ${OBJS_DIR}
+					$(RM) $(OBJS_DIR)
 
-fclean:			clean
-				${RM} ${NAME} ${NAME_BON}
+fclean:				clean
+					$(RM) $(NAME) $(NAME_BONUS)
 
-re:				fclean all
+re:					fclean all
 
-.PHONY:			all clean fclean re bonus dir
+.PHONY:				all dir clean fclean re bonus
