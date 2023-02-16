@@ -20,10 +20,12 @@
 # include <stdlib.h>
 # include <limits.h>
 
-// MAIN -------------------------------------------------------------
+// TYPEDEF ----------------------------------------------------------
 typedef struct s_stack		t_stack;
 typedef enum e_stacks		t_stacks;
+typedef enum e_exit			t_exit;
 
+// STRUCT -----------------------------------------------------------
 struct s_stack
 {
 	int	*a;
@@ -34,12 +36,19 @@ struct s_stack
 	int	print;
 };
 
+// ENUM -------------------------------------------------------------
 enum e_stacks
 {
 	NONE,
 	A,
 	B = 0,
 	ALL,
+};
+
+enum e_exit
+{
+	SUCCESS,
+	ERROR,
 };
 
 // SOLVE ------------------------------------------------------------
@@ -63,7 +72,6 @@ t_stack	*parsing(int ac, char **av);
 void	*free_stack(t_stack *stack, t_stacks stacks);
 void	put_str_nl(char *str);
 int		is_sort(t_stack *stack, int check_b);
-int		*convert_to_index(t_stack *stack);
 void	get_index(t_stack *stack);
 int		str_len(char *str);
 char	**split_(char const *s);

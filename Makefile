@@ -23,7 +23,7 @@ BON				= bonus_checker.c bonus_get_next_line.c
 OBJS_BON		= $(addprefix ${OBJS_DIR}, $(BON:.c=.o))
 NAME_BON		= checker
 
-HEAD			= push_swap.h
+HEAD			= .
 CC				= cc
 RM				= rm -rf
 FLAGS			= -Wall -Wextra -Werror

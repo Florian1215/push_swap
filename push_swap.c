@@ -37,9 +37,11 @@ int	main(int ac, char **av)
 {
 	t_stack	*stack;
 
+	if (ac == 1)
+		return (SUCCESS);
 	stack = parsing(--ac, ++av);
 	if (!stack)
-		return (1);
+		return (ERROR);
 	stack->print = 1;
 	if (!is_sort(stack, 0))
 	{
@@ -51,4 +53,5 @@ int	main(int ac, char **av)
 			solve_radix(stack);
 	}
 	free_stack(stack, ALL);
+	return (SUCCESS);
 }
