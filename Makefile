@@ -3,7 +3,7 @@
 OBJS_DIR		=	.OBJS/
 SRCS			=	INSTRUCTIONS/push.c INSTRUCTIONS/reverse.c INSTRUCTIONS/rotate.c INSTRUCTIONS/swap.c \
 					UTILS/parsing.c UTILS/sort_index.c UTILS/split.c UTILS/utils1.c UTILS/utils2.c
-OBJS_SRC		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
+OBJS			=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
 NAME			=	push_swap
 SRCS_MAND		=	SOLVE/push_swap.c SOLVE/radix.c SOLVE/smart_sort.c SOLVE/utils_solve1.c SOLVE/utils_solve2.c SOLVE/utils_solve3.c
@@ -23,11 +23,11 @@ FLAGS			=	-Wall -Wextra -Werror
 # RULES -------------------------------------------------------------
 all:				$(NAME)
 
-$(NAME):			$(OBJS_SRC) $(OBJS_MAND)
-					$(CC) $(FLAGS) $(OBJS_SRC) $(OBJS_MAND) -o $(NAME)
+$(NAME):			$(OBJS) $(OBJS_MAND)
+					$(CC) $(FLAGS) $(OBJS) $(OBJS_MAND) -o $(NAME)
 
-bonus:				$(OBJS_SRC) $(OBJS_BONUS)
-					$(CC) $(FLAGS) $(OBJS_SRC) $(OBJS_BONUS) -o $(NAME_BONUS)
+bonus:				$(OBJS) $(OBJS_BONUS)
+					$(CC) $(FLAGS) $(OBJS) $(OBJS_BONUS) -o $(NAME_BONUS)
 
 $(OBJS_DIR)%.o:		%.c $(HEAD) Makefile | dir
 					$(CC) $(FLAGS) -I $(HEAD_DIR) -c $< -o $@
